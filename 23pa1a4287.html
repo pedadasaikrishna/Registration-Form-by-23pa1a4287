@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+      
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+            height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;  
+            color: #5c6bc0;
+            margin-top: 50px;
+        }
+
+        form {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            font-size: 15px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="password"], textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="date"]:focus, input[type="password"]:focus, textarea:focus {
+            border-color: #5c6bc0;
+            box-shadow: 0 0 10px rgba(92, 107, 192, 0.5);
+            outline: none;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .gender-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background-color: #5c6bc0;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3949ab;
+        }
+
+        .error {
+            color: #d32f2f;
+            font-size: 12px;
+            margin-top: -10px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+  
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input[type="radio"] {
+            width: auto;
+        }
+
+        .form-group label {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: normal;
+        }
+
+    </style>
+</head>
+<body>
+ 
+ 
+    <form id="registrationForm" action="" method="post">
+        <h1>Registration Form</h1>
+
+        <div class="form-group">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+            <div id="fullnameError" class="error"></div>
+        </div>
+
+    
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <div id="emailError" class="error"></div>
+        </div>
+
+ 
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <div id="phoneError" class="error"></div>
+        </div>
+ 
+        <div class="form-group gender-group">
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="Male" required><label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female" required><label for="female">Female</label>
+            <input type="radio" id="other" name="gender" value="Other" required><label for="other">Other</label>
+            <div id="genderError" class="error"></div>
+        </div>
+
+   
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            <div id="dobError" class="error"></div>
+        </div>
+ 
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="4" required></textarea>
+            <div id="addressError" class="error"></div>
+        </div>
+ 
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div id="passwordError" class="error"></div>
+        </div>
+
+ 
+        <div class="form-group">
+            <label for="conf-password">Confirm Password:</label>
+            <input type="password" id="conf-password" name="conf-password" required>
+            <div id="confPasswordError" class="error"></div>
+        </div>
+
+ 
+        <input type="submit" value="Register">
+
+    </form>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            let valid = true;
+
+ 
+            const errors = document.querySelectorAll('.error');
+            errors.forEach(error => error.innerHTML = "");
+ 
+            const fullname = document.getElementById("fullname").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const gender = document.querySelector('input[name="gender"]:checked');
+            const dob = document.getElementById("dob").value;
+            const address = document.getElementById("address").value;
+            const password = document.getElementById("password").value;
+            const confPassword = document.getElementById("conf-password").value;
+
+ 
+            if (!fullname.trim()) {
+                document.getElementById("fullnameError").innerText = "Full Name is required.";
+                valid = false;
+            }
+
+ 
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerText = "Please enter a valid email address.";
+                valid = false;
+            }
+ 
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone)) {
+                document.getElementById("phoneError").innerText = "Phone number must be 10 digits.";
+                valid = false;
+            }
+ 
+            if (!gender) {
+                document.getElementById("genderError").innerText = "Please select your gender.";
+                valid = false;
+            }
+
+ 
+            if (!dob) {
+                document.getElementById("dobError").innerText = "Date of Birth is required.";
+                valid = false;
+            }
+
+ 
+            if (!address.trim()) {
+                document.getElementById("addressError").innerText = "Address is required.";
+                valid = false;
+            }
+ 
+            if (password.length < 6) {
+                document.getElementById("passwordError").innerText = "Password must be at least 6 characters long.";
+                valid = false;
+            }
+
+            if (password !== confPassword) {
+                document.getElementById("confPasswordError").innerText = "Passwords do not match.";
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault(); 
+            }
+        });
+    </script>
+
+</body>
+</html>
